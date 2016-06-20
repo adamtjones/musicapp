@@ -1,0 +1,44 @@
+.container {
+	width: 50%;
+	background-color: #F5F5F5;
+	height: 1000px;
+	margin: auto;
+	display: block;
+	text-align: center;
+	font-family: Montserrat;
+	padding-top: 10px;
+}
+.player {
+	width: 100%;
+	display: block;
+}
+.dallas {
+	width: 90%;
+	color: #F5F5F5;
+}
+audio {
+	background-color: gray;
+}
+
+h6 {
+	text-align: left;
+	margin-left: 30px;
+}
+hr {
+	width: 95%;
+}
+
+input {
+	width: 75%;
+	text-align:left;
+	height: 20px;
+}
+.button {
+	height: 20px;
+	background-color: #DADADA;
+	border-radius: 5px;
+}
+.search {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
