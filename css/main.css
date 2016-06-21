@@ -36,7 +36,10 @@ input {
 .button {
 	height: 20px;
 	background-color: #DADADA;
-	border-radius: 5px;
+	border-radius: 3px;
+	font-family: Montserrat;
+	width: 80px;
+	border: 1px solid gray;
 }
 .search {
 	margin-top: 30px;

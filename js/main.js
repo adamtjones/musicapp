@@ -1,48 +1,67 @@
-var total = 0;
+$( document ).ready(function() {
+    console.log( "ready!" );
 
-var isBlueInCart = false;
-var isPinkInCart = false;
-var isOrangeInCart = false;
-
-var subtotalBox = document.getElementById('subtotal');
-var totalBox = document.getElementById('total');
-
-var blueCart = document.getElementById('blueShoppingCart');
-var pinkCart = document.getElementById('pinkShoppingCart');
-var orangeCart = document.getElementById('orangeShoppingCart');
-
-function addToCart(price,color) {
-	if(color==='blue' && isBlueInCart===false) {
-		total += price;
-		isBlueInCart = true;
-	}
-	else if(color==='blue' && isBlueInCart===true) {
-		total -= price;
-		isBlueInCart = false;
-	}
-	else if(color==='pink' && isPinkInCart===false) {
-		total += price;
-		isPinkInCart = true;
-	}
-	else if(color==='pink' && isPinkInCart===true) {
-		total -= price;
-		isPinkInCart = false;
-	}
-	else if(color==='orange' && isOrangeInCart===false) {
-		total += price;
-		isOrangeInCart = true;
-	}
-	else if(color==='orange' && isOrangeInCart===true) {
-		total -= price;
-		isOrangeInCart = false;
-	}
-
+$.ajax({
+	url: 'http://api.soundcloud.com/tracks?client_id=615fca50c4393c497696d47cb1e9136a',
+	data: data,
+	type: "GET"
+	success: function successHandler(music) {
 	
-	subtotalBox.innerHTML = total;
-	totalBox.innerHTML = calculateFinalTotal();
+
+songs.forEach {
 
 }
 
-function calculateFinalTotal() {
-	return (total*.065)+total;
+
+$("img").on('click', function(){
+	var sc = $(this).data('soundcloud');
+	alert(sc);
+})
+
+
+image.eventListener {
+
 }
+
+$this
+
+
+/*not sure about stuff below*/
+var apikey = "615fca50c4393c497696d47cb1e9136a";
+var baseUrl = "http://api.soundcloud.com/tracks?client_id=";
+ 
+
+var musicSearchUrl = baseUrl + '/movies.json?apikey=' + apikey;
+var query = "Rolling Stones";
+
+$.ajax({
+    url: musicSearchUrl + '&q=' + encodeURI(query),
+    dataType: "jsonp",
+    success: searchCallback
+  });
+});
+
+// callback for when we get back the results
+function searchCallback(data) {
+ $(document.body).append('Found ' + data.total + ' results for ' + query);
+ var music = data.music;
+ $.each(music, function(index, music) {
+   $(document.body).append('<h1>' + music.title + '</h1>');
+   $(document.body).append('<img src="' + music.posters.thumbnail + '" />');
+ });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+});
