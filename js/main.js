@@ -1,67 +1,49 @@
-$( document ).ready(function() {
-    console.log( "ready!" );
+$(document).ready(function() {
+    $("input").focus();
 
-$.ajax({
-	url: 'http://api.soundcloud.com/tracks?client_id=615fca50c4393c497696d47cb1e9136a',
-	data: data,
-	type: "GET"
-	success: function successHandler(music) {
-	
+    $('form').on("submit", function(event) {
+        event.preventDefault();
 
-songs.forEach {
+        var searchMusic = $(this).find('input').val();
 
-}
+        $.ajax({
+            url: "http://api.soundcloud.com/tracks?client_id=03e4633e2d85874a921380e47cac705d&q=" + searchMusic,
+            success: function success(results) {
 
+                var searchResults = results;
 
-$("img").on('click', function(){
-	var sc = $(this).data('soundcloud');
-	alert(sc);
-})
+                searchResults.forEach(function(music) {
 
+                    var title = music.title;
 
-image.eventListener {
+                    if (music.artwork_url === null) {
+                        $(".resultsSection").append("<div class = 'col-xs-6'><img data-soundcloud = " + music.id + " src ='http://placehold.it/300x300'><h2>" + title + "</h2></div>");
+                    } else {
 
-}
+                        var artWorkURL = music.artwork_url;
+                        var displayArtWorkURL = artWorkURL.replace("large", "t300x300");
 
-$this
+                        $(".resultsSection").append("<div class = 'col-xs-6'><img data-soundcloud = " + music.id + " src=" + displayArtWorkURL + "><h2>" + title + "</h2></div>");
+                    }
 
+                });
+            }
+        });
 
-/*not sure about stuff below*/
-var apikey = "615fca50c4393c497696d47cb1e9136a";
-var baseUrl = "http://api.soundcloud.com/tracks?client_id=";
- 
-
-var musicSearchUrl = baseUrl + '/movies.json?apikey=' + apikey;
-var query = "Rolling Stones";
-
-$.ajax({
-    url: musicSearchUrl + '&q=' + encodeURI(query),
-    dataType: "jsonp",
-    success: searchCallback
-  });
+        $('input').val('');
+        $('form').on('submit', function() {
+            $('.resultsSection').html('');
+        });
+    });
 });
 
-// callback for when we get back the results
-function searchCallback(data) {
- $(document.body).append('Found ' + data.total + ' results for ' + query);
- var music = data.music;
- $.each(music, function(index, music) {
-   $(document.body).append('<h1>' + music.title + '</h1>');
-   $(document.body).append('<img src="' + music.posters.thumbnail + '" />');
- });
-}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+$('.resultsSection').on('click', 'img', function(e) {
+    var id = $(this).data('soundcloud');
+    console.log(id);
+    $('audio').attr('src', function() {
+        return "http://api.soundcloud.com/tracks/" + id + "/stream?client_id=03e4633e2d85874a921380e47cac705d";
+    });
 });
